@@ -2,7 +2,7 @@ resource "aws_instance" "nat_instance" {
   ami           = var.nat_amis[var.region]
   instance_type = var.ec2_instance_type
   subnet_id = var.public_subnet_ids[0]
-  vpc_security_group_ids = ["aws_security_group.nat_security_group.id"]
+  vpc_security_group_ids = [var.nat_security_grp_id]
   source_dest_check = false
   # associate_public_ip_address = true # This is not needed as the associated subnet launched on public ip
   tags = {
