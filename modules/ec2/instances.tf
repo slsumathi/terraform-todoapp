@@ -14,7 +14,7 @@ resource "aws_instance" "todoapp_ec2_instance" {
   # Attach security groups to EC2 instances
   vpc_security_group_ids = [var.ec2_security_grp_id]
 
-  key_name = "aws_key_pair.ec2_key_pair.key_name"
+  key_name = aws_key_pair.ec2_key_pair.key_name
 }
 
 resource "aws_key_pair" "ec2_key_pair" {

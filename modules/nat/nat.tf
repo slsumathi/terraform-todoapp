@@ -15,7 +15,7 @@ resource "aws_route_table" "private_route_table_to_nat" {
 
   route {
       cidr_block = "0.0.0.0/0"
-      instance_id = "aws_instance.nat_instance.id"
+      instance_id = aws_instance.nat_instance.id
   }
 
   tags = {
