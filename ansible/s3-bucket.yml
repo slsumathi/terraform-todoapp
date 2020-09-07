@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Create S3 bucket
+      s3_bucket:
+        name: terraform-state-bucket 
+        state: present

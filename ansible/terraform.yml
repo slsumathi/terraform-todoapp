@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+
+    # Below are default values. 
+    # Real values can be given while running playbook
+
+    aws_state: present
+    s3_bucket: "todoapp-terraform-state-bucket"
+    key: terraform.tfstate  # This is the key
+    region: ap-south-1
+    todoapp_env: dev
+    
+  tasks:
+    - name: Run terraform scripts
+      terraform: # Ansible module name for terraform
+        project_path:  "./" # path to find terraform scripts
+        state: "{{ aws_state }}"
+
+        backend-config:
+          bucket: "{{ s3_bucket }}"
+          key: "{{ key }}"
+          region: "{{ region }}"
+
+        variables_file: "{{ todoapp_env }}.tfvars"
+        workspace: "{{ todoapp_env }}"
