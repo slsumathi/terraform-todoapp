@@ -57,7 +57,7 @@ module "nat" {
 module "rds" {
   source  = "../modules/rds"
   private_subnet_ids = module.private-subnets.private_subnet_ids
-  rds_security_grp_name = module.sgs.rds_security_grp_name
+  rds_security_grp_id = module.sgs.rds_security_grp_id
 }
 
 module "igw" {

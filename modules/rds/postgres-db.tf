@@ -1,5 +1,5 @@
 resource "aws_db_instance" "postgres_db_instance" {
-  name                 = "postgres-db-instance-${terraform.workspace}"
+  name                 = "postgresDbInstance${terraform.workspace}"
   identifier           = "postgres-rds-instance"
 
   allocated_storage    = 20
@@ -15,7 +15,7 @@ resource "aws_db_instance" "postgres_db_instance" {
   #parameter_group_name = "default.mysql5.7"
   db_subnet_group_name = aws_db_subnet_group.aws_db_subnet_group.id
 
-  security_group_names = [var.rds_security_grp_name]
+  vpc_security_group_ids = [var.rds_security_grp_id]
 
   # Make sure that backup_window and auto minor version upgrade will
   # not happen at the same time
