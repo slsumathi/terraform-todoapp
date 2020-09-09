@@ -10,36 +10,36 @@ pipeline {
               
     stages
     {
-        stage('S3 bucket creation - dev')
-        {  
-            steps  
-            {  
-                script
-                {
-                    sh "ansible-playbook ansible/s3-bucket.yml"
-                }
-            }  
-        }
+        // stage('S3 bucket creation - dev')
+        // {  
+        //     steps  
+        //     {  
+        //         script
+        //         {
+        //             sh "ansible-playbook ansible/s3-bucket.yml"
+        //         }
+        //     }  
+        // }
 
         stage('terraform init and apply - dev')
         {
             steps
             {
-                sh returnStatus: true; script: 'terraform workspace new prod'
+                sh returnStatus: true; script: 'terraform workspace new dev'
                 sh "terraform init"
-                sh "ansible-playbook ansible/terraform.yml -e todoapp_env=prod"
+                sh "ansible-playbook ansible/terraform.yml -e todoapp_env=dev"
             }
         }
 
-        stage('terraform init and apply - dev')
-        {
-            steps
-            {
-                sh returnStatus: true; script: 'terraform workspace new prod'
-                sh "terraform init"
-                sh "ansible-playbook ansible/terraform.yml"
-            }
-        }
+        // stage('terraform init and apply - prod')
+        // {
+        //     steps
+        //     {
+        //         sh returnStatus: true; script: 'terraform workspace new prod'
+        //         sh "terraform init"
+        //         sh "ansible-playbook ansible/terraform.yml"
+        //     }
+        // }
     }
 }
 

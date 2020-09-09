@@ -6,6 +6,14 @@ variable "ec2_tags" {
   description = "EC2 tags"
 }
 
+variable "ec2_jenkins_tags" {
+  type        = map
+  default = {
+    Name = "EC2 Jenkins instance"
+  }
+  description = "EC2 Jenkins tags"
+}
+
 variable "ec2_count" {
   type        = string
   default     = "2"
@@ -38,5 +46,9 @@ variable "public_subnet_ids" {
 }
 
 variable "ec2_security_grp_id" {
+  type        = string
+}
+
+variable "elb_security_grp_id" {
   type        = string
 }

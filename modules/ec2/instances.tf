@@ -17,7 +17,22 @@ resource "aws_instance" "todoapp_ec2_instance" {
   key_name = aws_key_pair.ec2_key_pair.key_name
 }
 
+resource "aws_instance" "todoapp_ec2_jenkins_instance" {
+  ami           = var.ec2_amis[var.region]
+  instance_type = var.ec2_instance_type
+  subnet_id     = var.public_subnet_ids[0]
+  tags          = var.ec2_jenkins_tags
+
+  user_data     = file("${path.module}/scripts/ec2_jenkins.sh")
+
+  # Attach security groups to EC2 instances
+  vpc_security_group_ids = [var.elb_security_grp_id]
+
+  key_name = aws_key_pair.ec2_key_pair.key_name
+}
+
 resource "aws_key_pair" "ec2_key_pair" {
   key_name   = "ec2-key-pair"
   public_key = file("${path.module}/ec2.pub")
 }
+

@@ -13,7 +13,7 @@ provider "aws" {
 
 module "s3" {
     source  = "../modules/s3"
-    todoapp_ui_path = "../../todoapp-redux/dist/"
+    todoapp_ui_path = "../ui/"
     s3_ui_bucket_name = "todoapp-react-ui-code"
 }
 
@@ -72,6 +72,7 @@ module "ec2" {
   ec2_count = "2" 
   public_subnet_ids = module.public-subnets.public_subnet_ids
   ec2_security_grp_id = module.sgs.ec2_security_grp_id
+  elb_security_grp_id = module.sgs.elb_security_grp_id
 }
 
 module "elb" {
