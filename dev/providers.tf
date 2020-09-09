@@ -11,11 +11,11 @@ provider "aws" {
 #   }
 # }
 
-# module "s3" {
-#     source  = "../modules/s3"
-#     todoapp_ui_path = "../../todoapp-redux/dist/"
-#     s3_ui_bucket_name = "todoapp-react-ui-code"
-# }
+module "s3" {
+    source  = "../modules/s3"
+    todoapp_ui_path = "../../todoapp-redux/dist/"
+    s3_ui_bucket_name = "todoapp-react-ui-code"
+}
 
 module "vpc" {
   source  = "../modules/vpc"
@@ -77,6 +77,16 @@ module "ec2" {
 module "elb" {
   source  = "../modules/elb"
   public_subnet_ids = module.public-subnets.public_subnet_ids
+  az_names = module.public-subnets.az_names
   ec2_instances = module.ec2.ec2_instances
   elb_security_grp_id = module.sgs.elb_security_grp_id
+}
+
+module "auto-scaling" {
+  source  = "../modules/auto-scaling"
+  ec2_security_grp_id = module.sgs.ec2_security_grp_id
+  ec2_ami = module.ec2.ec2_ami
+  key_name = module.ec2.key_name
+  elb_name = module.elb.elb_name
+  public_subnet_ids = module.public-subnets.public_subnet_ids
 }

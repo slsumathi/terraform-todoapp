@@ -20,6 +20,7 @@ resource "aws_elb" "ec2_load_balancer" {
   }
 
   instances                   = var.ec2_instances
+
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true

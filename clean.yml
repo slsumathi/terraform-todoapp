@@ -1,0 +1,4 @@
+#aws_security_group:
+#  - id: sg-05ca2200296fbfe21
+aws_network_interface:
+  - id: eni-0543296fba037c443
