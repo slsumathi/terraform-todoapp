@@ -11,7 +11,7 @@ resource "aws_launch_configuration" "ec2_launch_config" {
 
 resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   name                      = "ec2-autoscaling-group"
-  max_size                  = 2
+  max_size                  = 3
   min_size                  = 1
   health_check_grace_period = 60
   health_check_type         = "ELB"
