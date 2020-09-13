@@ -66,19 +66,19 @@ pipeline {
 
         stage('terraform init and apply - dev')
         {
-            when {
-                // If this boolean expression is true then only go further and execute steps section
-                expression {
-                    // Only if branch name is master or dev then only the following steps will get executed
-                    env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev'
-                }
-            }
+            // when {
+            //     // If this boolean expression is true then only go further and execute steps section
+            //     expression {
+            //         // Only if branch name is master or dev then only the following steps will get executed
+            //         env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev'
+            //     }
+            // }
             steps
             {
                 sh 'cd dev'
                 sh 'terraform workspace new dev'
                 sh "terraform init"
-                // sh "ansible-playbook ../ansible/terraform.yml -e todoapp_env=dev"
+                sh "ansible-playbook ../ansible/terraform.yml -e todoapp_env=dev"
             }
         }
 
