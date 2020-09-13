@@ -16,7 +16,7 @@ pipeline {
         // Here are various types of parameters
         // We can use these parameters in any of the below stages
         string ( name: "VERSION", defaultValue = "1.0" , description: "This version is meant for production deployment")
-        choice ( name: "VERSION", choices : ["1.0", "2.0", "3.0", description: "Choices to be selected"])
+        choice ( name: "VERSION", choices : ["1.0", "2.0", "3.0"], description: "Choices to be selected"])
         booleanParam ( name: "prodBuild", defaultValue: true, description: "Production build")
     }
 
