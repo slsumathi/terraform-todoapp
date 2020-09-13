@@ -9,6 +9,8 @@
     // We don't need this basically as we can create hooks in git to trigger build on code changes
 // }
 
+def gv // Global variable which can be used anywhere in the pipeline
+
 pipeline {
     agent any  // Where to execute  Eg: node info...etc
 
@@ -48,21 +50,34 @@ pipeline {
         //     }  
         // }
 
-        stage('build')
+         stage('init')
         {
-            when {
-                // If this boolean expression is true then only go further and execute steps section
-                expression {
-                    // If prodBuild is true then only execute below steps
-                    params.prodBuild == true
-                }
-            }
             steps
             {
-                echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
-                echo "Version being deployed is ${}"
+                // echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
+                // echo "Version being deployed is ${}"
+
+                script {
+                    gv = load( "script.groovy" )
+                }
             }
         }
+
+        // stage('build')
+        // {
+        //     when {
+        //         // If this boolean expression is true then only go further and execute steps section
+        //         expression {
+        //             // If prodBuild is true then only execute below steps
+        //             params.prodBuild == true
+        //         }
+        //     }
+        //     steps
+        //     {
+        //         echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
+        //         echo "Version being deployed is ${}"
+        //     }
+        // }
 
         stage('terraform init and apply - dev')
         {
@@ -75,23 +90,33 @@ pipeline {
             // }
             steps
             {
-                // sh 'cd dev'
                 echo "Hi Sumathi"
-                // sh 'terraform workspace new dev'
-                // sh "terraform init"
-                // sh "ansible terraform.yml"
+                script {
+                    gv.buildDevapp()
+                    // sh 'cd dev'
+                    // sh 'terraform workspace new dev'
+                    // sh "terraform init"
+                    // sh "ansible terraform.yml"
+                }
             }
         }
 
-        // stage('terraform init and apply - prod')
-        // {
-        //     steps
-        //     {
-        //         sh returnStatus: true; script: 'terraform workspace new prod'
-        //         sh "terraform init"
-        //         sh "ansible-playbook ansible/terraform.yml"
-        //     }
-        // }
+        stage('terraform init and apply - prod')
+        {
+            steps
+            {
+                script {
+                    gv.buildProdapp()
+                    // sh 'cd dev'
+                    // sh 'terraform workspace new dev'
+                    // sh "terraform init"
+                    // sh "ansible terraform.yml"
+                }
+                sh returnStatus: true; script: 'terraform workspace new prod'
+                sh "terraform init"
+                sh "ansible-playbook ansible/terraform.yml"
+            }
+        }
     }
     post {
         // Execute something after all the stages are done
