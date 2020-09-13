@@ -12,6 +12,24 @@ CODE_CHANGES = getGitChanges() {
 pipeline {
     agent any  // Where to execute  Eg: node info...etc
 
+    parameters {
+        // Here are various types of parameters
+        // We can use these parameters in any of the below stages
+        string ( name: "VERSION", defaultValue = "1.0" , description: "This version is meant for production deployment")
+        choice ( name: "VERSION", choices : ["1.0", "2.0", "3.0", description: "Choices to be selected"])
+        booleanParam ( name: "prodBuild", defaultValue: true, description: "Production build")
+    }
+
+    tools {
+        // Build tools can be configured here
+        // The three tools supported by jenkins by default are are gradle, maven or jdk
+        // If you need any other tools those need to be installed and configured in jenkins dashboard
+        // You can see them in "Global tool configuration"
+
+        // The name of the installation needs to be provided here
+        maven 'Maven'
+    }
+
     environment {
         // Define all the environment variables here
         PATH = "${PATH}/${getTerraformPath()}"
@@ -36,14 +54,15 @@ pipeline {
             when {
                 // If this boolean expression is true then only go further and execute steps section
 
-                echo "New version is ${NEW_VERSION}"  // Here we should use double quotes alone
+                echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
                 expression {
-                    // Only if branch name is master or dev then only the following steps will get executed
-                    // env.BRANCH_NAME == 'master' && CODE_CHANGES == true
+                    // If prodBuild is true then only execute below steps
+                    params.prodBuild == true
                 }
             }
             steps
             {
+                echo "Version being deployed is ${}"
             }
         }
 
