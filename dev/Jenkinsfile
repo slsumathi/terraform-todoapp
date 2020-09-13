@@ -1,5 +1,8 @@
+
 // Jenkins job
 // Add this Jenkinsfile in the same folder where you have Terraform scripts
+
+CODE_CHANGES = getGitChanges()
 
 pipeline {
     agent any  # Where to execute  Eg: node info...etc
@@ -21,8 +24,29 @@ pipeline {
         //     }  
         // }
 
+        stage('build')
+        {
+            when {
+                // If this boolean expression is true then only go further and execute steps section
+                expression {
+                    // Only if branch name is master or dev then only the following steps will get executed
+                    env.BRANCH_NAME == 'master' && CODE_CHANGES == true
+                }
+            }
+            steps
+            {
+            }
+        }
+
         stage('terraform init and apply - dev')
         {
+            when {
+                // If this boolean expression is true then only go further and execute steps section
+                expression {
+                    // Only if branch name is master or dev then only the following steps will get executed
+                    env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev'
+                }
+            }
             steps
             {
                 sh returnStatus: true; script: 'terraform workspace new dev'
@@ -40,6 +64,18 @@ pipeline {
         //         sh "ansible-playbook ansible/terraform.yml"
         //     }
         // }
+    }
+    post {
+        // Execute something after all the stages are done
+        aways {
+            // Execute this code always i.e. irrespective of whether build is failed and successful
+        }
+        success {
+            // Exceute this script if the build is successful
+        }
+        failure {
+            // Execute this script if the build is failed
+        }
     }
 }
 
