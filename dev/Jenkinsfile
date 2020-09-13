@@ -2,17 +2,17 @@
 # Add this Jenkinsfile in the same folder where you have Terraform scripts
 
 pipeline {
-    agent any  
+    agent any  # Where to execute  Eg: node info...etc
 
     environment {
         PATH = "${PATH}/${getTerraformPath()}"
     }
               
-    stages
+    stages # This is where we define the steps to be executed
     {
         // stage('S3 bucket creation - dev')
         // {  
-        //     steps  
+        //     steps # Executes commands on Jenkins server 
         //     {  
         //         script
         //         {
