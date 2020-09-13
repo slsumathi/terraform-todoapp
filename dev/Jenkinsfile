@@ -15,20 +15,19 @@ pipeline {
     parameters {
         // Here are various types of parameters
         // We can use these parameters in any of the below stages
-        string ( name: "VERSION", defaultValue = "1.0" , description: "This version is meant for production deployment")
         choice ( name: "VERSION", choices : ["1.0", "2.0", "3.0"], description: "Choices to be selected")
         booleanParam ( name: "prodBuild", defaultValue: true, description: "Production build")
     }
 
-    tools {
-        // Build tools can be configured here
-        // The three tools supported by jenkins by default are are gradle, maven or jdk
-        // If you need any other tools those need to be installed and configured in jenkins dashboard
-        // You can see them in "Global tool configuration"
+    // tools {
+    //     Build tools can be configured here
+    //     The three tools supported by jenkins by default are are gradle, maven or jdk
+    //     If you need any other tools those need to be installed and configured in jenkins dashboard
+    //     You can see them in "Global tool configuration"
 
-        // The name of the installation needs to be provided here
-        // maven 'Maven'
-    }
+    //     The name of the installation needs to be provided here
+    //     maven 'Maven'
+    // }
 
     environment {
         // Define all the environment variables here
@@ -92,18 +91,18 @@ pipeline {
         //     }
         // }
     }
-    post {
-        // Execute something after all the stages are done
-        always {
-            // Execute this code always i.e. irrespective of whether build is failed and successful
-        }
-        success {
-            // Exceute this script if the build is successful
-        }
-        failure {
-            // Execute this script if the build is failed
-        }
-    }
+    // post {
+    //     // Execute something after all the stages are done
+    //     always {
+    //         // Execute this code always i.e. irrespective of whether build is failed and successful
+    //     }
+    //     success {
+    //         // Exceute this script if the build is successful
+    //     }
+    //     failure {
+    //         // Execute this script if the build is failed
+    //     }
+    // }
 }
 
 // This will return the path where terraform is installed
