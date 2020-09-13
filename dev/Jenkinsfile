@@ -58,7 +58,7 @@ pipeline {
                 // echo "Version being deployed is ${}"
 
                 script {
-                    gv = load( "script.groovy" )
+                    gv = load( "dev/script.groovy" )
                 }
             }
         }
