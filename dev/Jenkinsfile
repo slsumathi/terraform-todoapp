@@ -1,11 +1,11 @@
-# Jenkins job
-# Add this Jenkinsfile in the same folder where you have Terraform scripts
+// Jenkins job
+// Add this Jenkinsfile in the same folder where you have Terraform scripts
 
 pipeline {
     agent any  # Where to execute  Eg: node info...etc
 
     environment {
-        PATH = "${PATH}/${getTerraformPath()}"
+        // PATH = "${PATH}/${getTerraformPath()}"
     }
               
     stages # This is where we define the steps to be executed
@@ -27,7 +27,7 @@ pipeline {
             {
                 sh returnStatus: true; script: 'terraform workspace new dev'
                 sh "terraform init"
-                sh "ansible-playbook ansible/terraform.yml -e todoapp_env=dev"
+                // sh "ansible-playbook ansible/terraform.yml -e todoapp_env=dev"
             }
         }
 
@@ -43,9 +43,9 @@ pipeline {
     }
 }
 
-# This will return the path where terraform is installed
-def getTerraformPath()
+// This will return the path where terraform is installed
+def setTerraformPath()
 {
-    def tfHome = "Generated script from Jenkins"
-    return tfHome
+    def tfHome = tool name: ‘Terraform’
+    env.PATH = "${tfHome}:${env.PATH}"
 }
