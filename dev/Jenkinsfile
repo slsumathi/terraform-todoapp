@@ -75,9 +75,9 @@ pipeline {
             // }
             steps
             {
-                sh 'cd dev'
-                sh 'terraform workspace new dev'
-                sh "terraform init"
+                // sh 'cd dev'
+                // sh 'terraform workspace new dev'
+                // sh "terraform init"
                 sh "ansible-playbook ../ansible/terraform.yml -e todoapp_env=dev"
             }
         }
