@@ -76,9 +76,10 @@ pipeline {
             steps
             {
                 // sh 'cd dev'
-                sh 'terraform workspace new dev'
-                sh "terraform init"
-                //sh "ansible terraform.yml"
+                echo "Hi Sumathi"
+                // sh 'terraform workspace new dev'
+                // sh "terraform init"
+                // sh "ansible terraform.yml"
             }
         }
 
