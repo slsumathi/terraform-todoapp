@@ -4,10 +4,10 @@
 
 // For all env variables available in jenkins http://13.233.174.118:8080/env-vars.html/
 
-CODE_CHANGES = getGitChanges() {
+// CODE_CHANGES = getGitChanges() {
     // Return true in case of any changes in git code.
     // We don't need this basically as we can create hooks in git to trigger build on code changes
-}
+// }
 
 pipeline {
     agent any  // Where to execute  Eg: node info...etc
