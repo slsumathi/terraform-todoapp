@@ -53,8 +53,6 @@ pipeline {
         {
             when {
                 // If this boolean expression is true then only go further and execute steps section
-
-                echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
                 expression {
                     // If prodBuild is true then only execute below steps
                     params.prodBuild == true
@@ -62,6 +60,7 @@ pipeline {
             }
             steps
             {
+                echo "New version is ${params.NEW_VERSION}"  // Here we should use double quotes alone
                 echo "Version being deployed is ${}"
             }
         }
