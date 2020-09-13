@@ -13,10 +13,14 @@
     todoapp_env: dev
     
   tasks:
+    - shell: ps -eo pcpu,user,args | sort -r -k1 | head -n5
+      register: ps
+    - debug: var=ps.stdout_lines
     - name: Run terraform scripts
       terraform: # Ansible module name for terraform
         project_path:  "../dev" # path to find terraform scripts
         state: "{{ aws_state }}"
+        force_init: true
 
         # backend-config:
         #   bucket: "{{ s3_bucket }}"
@@ -25,4 +29,3 @@
 
         # variables_file: "{{ todoapp_env }}.tfvars"
         workspace: "{{ todoapp_env }}"
-        
