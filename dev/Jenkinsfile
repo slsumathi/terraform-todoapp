@@ -27,7 +27,7 @@ pipeline {
         // You can see them in "Global tool configuration"
 
         // The name of the installation needs to be provided here
-        maven 'Maven'
+        // maven 'Maven'
     }
 
     environment {
@@ -94,7 +94,7 @@ pipeline {
     }
     post {
         // Execute something after all the stages are done
-        aways {
+        always {
             // Execute this code always i.e. irrespective of whether build is failed and successful
         }
         success {
