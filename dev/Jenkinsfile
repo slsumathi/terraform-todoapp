@@ -75,7 +75,7 @@ pipeline {
             }
             steps
             {
-                sh returnStatus: true; script: 'terraform workspace new dev'
+                sh returnStatus: true; sh: 'terraform workspace new dev'
                 sh "terraform init"
                 // sh "ansible-playbook ../ansible/terraform.yml -e todoapp_env=dev"
             }
