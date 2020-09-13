@@ -2,6 +2,8 @@
 // Jenkins job
 // Add this Jenkinsfile in the same folder where you have Terraform scripts
 
+// For all env variables available in jenkins http://13.233.174.118:8080/env-vars.html/
+
 CODE_CHANGES = getGitChanges() {
     // Return true in case of any changes in git code.
     // We don't need this basically as we can create hooks in git to trigger build on code changes
@@ -11,7 +13,9 @@ pipeline {
     agent any  // Where to execute  Eg: node info...etc
 
     environment {
-        // PATH = "${PATH}/${getTerraformPath()}"
+        // Define all the environment variables here
+        PATH = "${PATH}/${getTerraformPath()}"
+        NEW_VERSION = "1.0"
     }
               
     stages // This is where we define the steps to be executed
@@ -31,9 +35,11 @@ pipeline {
         {
             when {
                 // If this boolean expression is true then only go further and execute steps section
+
+                echo "New version is ${NEW_VERSION}"  // Here we should use double quotes alone
                 expression {
                     // Only if branch name is master or dev then only the following steps will get executed
-                    env.BRANCH_NAME == 'master' && CODE_CHANGES == true
+                    // env.BRANCH_NAME == 'master' && CODE_CHANGES == true
                 }
             }
             steps
@@ -54,7 +60,7 @@ pipeline {
             {
                 sh returnStatus: true; script: 'terraform workspace new dev'
                 sh "terraform init"
-                // sh "ansible-playbook ansible/terraform.yml -e todoapp_env=dev"
+                // sh "ansible-playbook ../ansible/terraform.yml -e todoapp_env=dev"
             }
         }
 

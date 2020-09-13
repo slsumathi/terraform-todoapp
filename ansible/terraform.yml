@@ -15,7 +15,7 @@
   tasks:
     - name: Run terraform scripts
       terraform: # Ansible module name for terraform
-        project_path:  "./dev" # path to find terraform scripts
+        project_path:  "../dev" # path to find terraform scripts
         state: "{{ aws_state }}"
 
         # backend-config:
