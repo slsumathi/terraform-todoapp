@@ -108,6 +108,6 @@ pipeline {
 // This will return the path where terraform is installed
 def setTerraformPath()
 {
-    def def tfHome = tool name: 'terraform'
+    def tfHome = tool name: 'terraform'
     env.PATH = "${tfHome}:${env.PATH}"
 }
