@@ -112,9 +112,9 @@ pipeline {
                     // sh "terraform init"
                     // sh "ansible terraform.yml"
                 }
-                sh returnStatus: true; script: 'terraform workspace new prod'
-                sh "terraform init"
-                sh "ansible-playbook ansible/terraform.yml"
+                // sh 'terraform workspace new prod'
+                // sh "terraform init"
+                // sh "ansible-playbook ansible/terraform.yml"
             }
         }
     }
