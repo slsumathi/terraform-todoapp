@@ -91,18 +91,21 @@ pipeline {
         //     }
         // }
     }
-    // post {
-    //     // Execute something after all the stages are done
-    //     always {
-    //         // Execute this code always i.e. irrespective of whether build is failed and successful
-    //     }
-    //     success {
-    //         // Exceute this script if the build is successful
-    //     }
-    //     failure {
-    //         // Execute this script if the build is failed
-    //     }
-    // }
+    post {
+        // Execute something after all the stages are done
+        always {
+            // Execute this code always i.e. irrespective of whether build is failed and successful
+            echo "Display this irrespective of success or failure"
+        }
+        success {
+            // Exceute this script if the build is successful
+            echo "Display this if the build is successful"
+        }
+        failure {
+            // Execute this script if the build is failed
+            echo "Display this if the build fails"
+        }
+    }
 }
 
 // This will return the path where terraform is installed
