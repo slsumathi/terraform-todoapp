@@ -5,7 +5,9 @@
 
 def buildDevapp () {
     println("This is dev build")
-    terraform --version
+    terraform -version
+    terraform init
+    terraform apply -auto-approve
 }
 
 def buildProdapp () {
