@@ -5,7 +5,7 @@
 
 def buildDevapp () {
     println("This is dev build")
-    "terraform --version".execute()
+    terraform --version
 }
 
 def buildProdapp () {
