@@ -91,7 +91,9 @@ pipeline {
             steps
             {
                 echo "Hi Sumathi"
-                gv.buildDevapp()
+                script {
+                    gv.buildDevapp()
+                }  
             }
         }
 
@@ -99,6 +101,7 @@ pipeline {
         {
             steps
             {
+                echo "Doing production build"
                 // gv.buildProdapp()
                 // script {
                     // sh 'cd dev'
