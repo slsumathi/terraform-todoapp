@@ -3,9 +3,11 @@
 
 def buildDevapp () {
     //sh 'cd dev'
-    sh 'terraform workspace new dev'
-    sh "terraform init"
-    sh "ansible terraform.yml"
+    sh "terraform --version"
+
+    // sh 'terraform workspace new dev'
+    // sh "terraform init"
+    // sh "ansible terraform.yml"
 }
 
 def buildProdapp () {
