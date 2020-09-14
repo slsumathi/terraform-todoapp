@@ -2,19 +2,12 @@
 // We have access to all the params and environment variables defined inside Jenkinspipeline file
 
 def buildDevapp () {
-    //sh 'cd dev'
-    sh "terraform --version"
-
-    // sh 'terraform workspace new dev'
-    // sh "terraform init"
-    // sh "ansible terraform.yml"
+    println("This is dev build")
+    "terraform --version".execute()
 }
 
 def buildProdapp () {
-    // sh 'cd prod'
-    // sh 'terraform workspace new dev'
-    // sh "terraform init"
-    // sh "ansible terraform.yml"
+    println("This is production build")
 }
 
 return this
