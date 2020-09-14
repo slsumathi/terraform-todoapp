@@ -1,6 +1,4 @@
 
-#!/usr/bin/env groovy
-
 // Add this Jenkinsfile in the same folder where you have Terraform scripts
 
 // For all env variables available in jenkins http://13.233.174.118:8080/env-vars.html/
