@@ -1,12 +1,6 @@
 // You can define variables and functions also here
 // We have access to all the params and environment variables defined inside Jenkinspipeline file
 
-@SourceURI
-URI sourceUri
-
-Path scriptLocation = Paths.get(sourceUri)
-
-
 def buildDevapp () {
     println("This is dev build")
     "terraform --version".execute()

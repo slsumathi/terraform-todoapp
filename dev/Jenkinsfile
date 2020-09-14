@@ -58,6 +58,7 @@ pipeline {
                 // echo "Version being deployed is ${}"
 
                 script {
+                    env.getEnvironment()
                     gv = load( "dev/script.groovy" )
                 }
             }
