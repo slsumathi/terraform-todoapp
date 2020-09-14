@@ -1,4 +1,5 @@
 
+#!/usr/bin/env groovy
 
 // Add this Jenkinsfile in the same folder where you have Terraform scripts
 
