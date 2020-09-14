@@ -99,13 +99,13 @@ pipeline {
         {
             steps
             {
-                script {
-                    gv.buildProdapp()
+                // gv.buildProdapp()
+                // script {
                     // sh 'cd dev'
                     // sh 'terraform workspace new dev'
                     // sh "terraform init"
                     // sh "ansible terraform.yml"
-                }
+                // }
                 // sh 'terraform workspace new prod'
                 // sh "terraform init"
                 // sh "ansible-playbook ansible/terraform.yml"
